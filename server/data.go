@@ -24,9 +24,10 @@ func dataPostHandler(ctx echo.Context) error {
 		return err
 	}
 
-	credentialType := credentialRequest.CredentialType()
+	
 	ok := credentialRequest.Validate()
 	if !ok {
+		credentialType := credentialRequest.CredentialType()
 		context.Log.Error("invalid credential request for ", credentialType)
 		ctx.Error(echo.NewHTTPError(http.StatusBadRequest, "invalid credential request for ", credentialType))
 		return err
